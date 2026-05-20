@@ -1,0 +1,10 @@
+import express from 'express';
+import { protect } from '../middleware/auth.js';
+import { getFeed, createPin, toggleLike, savePin, getProfileStats } from '../controllers/pinController.js';
+const router = express.Router();
+router.get('/feed', getFeed);
+router.get('/stats', protect, getProfileStats);
+router.post('/', protect, createPin);
+router.patch('/:id/like', protect, toggleLike);
+router.patch('/:id/save', protect, savePin);
+export default router;
